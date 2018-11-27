@@ -31,7 +31,6 @@ textarea {
     border: none;
     background-color: white;
     margin-top: 10px;
-    white-space: pre-wrap;
 }
 .image-center {
     display: block;
@@ -72,6 +71,7 @@ textarea {
 }
 .mdl-list__item-text-body {
     font-size: 12px;
+    white-space: pre-line;
 }
 .new-post {
     margin: 30px;
