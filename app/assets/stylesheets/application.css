@@ -16,6 +16,9 @@
 
  * { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; }
 
+a:active {
+    background-color: #ff4081;
+}
 h1 {
     font-size: 35px;
 }
@@ -28,6 +31,7 @@ textarea {
     border: none;
     background-color: white;
     margin-top: 10px;
+    white-space: pre-wrap;
 }
 .image-center {
     display: block;
@@ -64,6 +68,7 @@ textarea {
 .mdl-card__supporting-text {
     font-size: 15px;
     padding-right: 5px;
+    white-space: pre-line;
 }
 .mdl-list__item-text-body {
     font-size: 12px;
