@@ -4,7 +4,7 @@
   <% @posts.each do |f| %>
     <div class="demo-card-wide mdl-card mdl-shadow--2dp my-card">
       <div class="mdl-card__supporting-text">
-        <strong><div><%= f.title %></div></strong>
+        <strong><div><%= f.id - Post.first.id + 1 %>) <%= f.title %></div></strong>
         <div><%= f.content %></div>
       </div>
       <div class="mdl-card__actions mdl-card--border">
@@ -13,7 +13,7 @@
             <li class="mdl-list__item">
               <span class="mdl-list__item-primary-content">
                 <span class="mdl-list__item-text-body">
-                  <%= c.id%>) <%= c.content %>
+                  <%= c.id - Comment.first.id + 1%>) <%= c.content %>
                 </span>
               </span>
                 <span class="mdl-list__item-secondary-content">

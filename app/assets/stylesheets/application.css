@@ -31,7 +31,9 @@ textarea {
 }
 .image-center {
     display: block;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
     width: 40%;
 }
 .full-width {
