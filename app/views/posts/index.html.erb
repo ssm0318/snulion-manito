@@ -25,8 +25,8 @@
         <div class="mdl-grid--no-spacing">
           <form action='/posts/<%=f.id%>/comments' method='POST'>
             <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col">
-              <input class="mdl-textfield__input" type="text" id="sample1" name="content">
-              <label class="mdl-textfield__label" for="sample1">댓글 작성하기</label>
+              <textarea class="mdl-textfield__input comment-section" type="text" id="sample1" name="content" rows="1"></textarea>
+              <label class="mdl-textfield__label comment-label" for="sample1">댓글 작성하기</label>
             </div>
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
               등록
@@ -46,3 +46,17 @@
 <a href="/posts/new" class="create-post mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
   <i class="material-icons">add</i>
 </a>
+
+<script>
+    var textareas = document.querySelectorAll('textarea');
+
+    for(const textarea of textareas) {
+      textarea.addEventListener('keydown', () => {
+        setTimeout(function(){
+            console.log(textarea.scrollHeight);
+            textarea.style.cssText = 'height:auto; padding:0';
+            textarea.style.cssText = 'height:' + (textarea.scrollHeight) + 'px';
+        },0);
+      });
+    }
+</script>
