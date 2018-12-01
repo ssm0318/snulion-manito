@@ -1,19 +1,19 @@
 <% if @posts.size == 0 %>
   <img src='/prism.png' alt="띠용 이미지가 어디갔지" class="image-center">
 <% else %>
-  <% @posts.each do |f| %>
+  <% @posts.each_with_index do |f, i| %>
     <div class="demo-card-wide mdl-card mdl-shadow--2dp my-card">
       <div class="mdl-card__supporting-text">
-        <strong><div><%= f.id - Post.first.id + 1 %>) <%= f.title %></div></strong>
+        <strong><div><%= i+1 %>) <%= f.title %></div></strong>
         <div><%= f.content %></div>
       </div>
       <div class="mdl-card__actions mdl-card--border">
         <ul class="demo-list-three mdl-list no-margin no-padding">
-          <% f.comments.each do |c| %>
+          <% f.comments.each_with_index do |c, j| %>
             <li class="mdl-list__item">
               <span class="mdl-list__item-primary-content">
                 <span class="mdl-list__item-text-body">
-                  <%= c.id - Comment.first.id + 1%>) <%= c.content %>
+                  <%= j+1%>) <%= c.content %>
                 </span>
               </span>
                 <span class="mdl-list__item-secondary-content">
