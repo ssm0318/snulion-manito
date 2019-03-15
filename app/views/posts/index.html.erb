@@ -2,6 +2,7 @@
 <% if @posts.size == 0 %>
   <%= image_tag 'logo.png', class: "image-center" %>
 <% else %>
+  <div class="tabs"><%= link_to "보냈어요", posts_path %> | <%= link_to "받았어요", new_post_path %></div>
   <% @posts.each_with_index do |f, i| %>
     <div class="demo-card-wide mdl-card mdl-shadow--2dp my-card">
       <div class="mdl-card__supporting-text">
@@ -18,7 +19,7 @@
                 </span>
               </span>
               <span class="mdl-list__item-secondary-content">
-                <a data-confirm="진짜 삭제해?!" data-method="DELETE" data-post-id="<%= f.id %>" data-comment-id="<%= c.id %>" class="mdl-list__item-secondary-action ajax-delete" href="/posts/<%= f.id %>/comments/<%= c.id %>"><i class="material-icons">delete</i></a>
+                <a data-confirm="진짜 삭제해?!" data-method="DELETE" data-post-id="<%= f.id %>" data-comment-id="<%= c.id %>"class="mdl-list__item-secondary-action ajax-delete" href="/posts/<%= f.id %>/comments/<%= c.id %>"><i class="material-icons">delete</i></a>
               </span>
             </li>
           <% end %>

@@ -15,7 +15,17 @@
  */
 
  * { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; }
-
+ 
+.tabs {
+    margin: 25px 0 5px 80px;
+    font-size: 16px;
+    a {
+        text-decoration: none;
+    }
+    a:active {
+        background-color: #ffffff;
+    }
+}
 .name {
     margin: 0 10px 0 10px;
 }
