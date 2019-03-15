@@ -82,14 +82,15 @@
         }
       })
     })
+    
     $("form").submit(function(event){
-      const feed_id = $(this).data("feed_id")
+      const post_id = $(this).data("post_id")
       $.ajax({
-        url: "/feeds/" + feed_id + "/comments",
+        url: "/posts/" + post_id + "/comments",
         type: "POST",
         data: {
-          feed_id: feed_id,
-          content: $(".input"+feed_id).val()
+          post_id: post_id,
+          content: $(".input"+post_id).val()
         },
         dataType: "JSON",
         success: function(data) {

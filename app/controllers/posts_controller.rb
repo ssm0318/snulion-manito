@@ -28,7 +28,8 @@ class PostsController < ApplicationController
         post = Post.find(post_id)
         Comment.create(content: content, post_id: post_id)
 
-        redirect_to action: 'index'
+        # redirect_to action: 'index'
+        render json: {}
     end
 
     def destroy_comment
