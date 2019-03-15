@@ -1,4 +1,3 @@
-<%= link_to "Change your password", edit_user_registration_path %>
 
 <% if @posts.size == 0 %>
   <%= image_tag 'logo.png', class: "image-center" %>
@@ -18,9 +17,9 @@
                   <%= j+1%>) <%= c.content %>
                 </span>
               </span>
-                <span class="mdl-list__item-secondary-content">
-                  <a data-confirm="진짜 삭제해?!" data-method="DELETE" class="mdl-list__item-secondary-action" href="/posts/<%= f.id %>/comments/<%= c.id %>"><i class="material-icons">delete</i></a>
-                </span>
+              <span class="mdl-list__item-secondary-content">
+                <a data-confirm="진짜 삭제해?!" data-method="DELETE" data-post-id="<%= f.id %>" data-comment-id="<%= c.id %>" class="mdl-list__item-secondary-action ajax-delete" href="/posts/<%= f.id %>/comments/<%= c.id %>"><i class="material-icons">delete</i></a>
+              </span>
             </li>
           <% end %>
         </ul>
@@ -63,25 +62,22 @@
     }
 
     $(document).ready(function(){
-    $(".ajax-delete").on("click", function(e) {
-      const comment_id = $(this).data("comment_id")
-      e.preventDefault()  //클릭 event 외에 별도의 브라우저 행동을 block (ex: page 이동)
-      e.stopPropagation()  //부모 tag들에 event 전파(bubble up)를 block  
-      $.ajax({
-        type: "DELETE",
-        dataType: "JSON",
-        url: "/comments/" + comment_id,
-        data: {},
-        success: function(data) {
-          if ($(".comment" + comment_id).hasClass("newest-comment")) {
-            $(".comment" + comment_id).next("li").addClass("newest-comment")
-            $(".comment" + comment_id).next("li").show()
+      $(".ajax-delete").on("click", function(e) {
+        const comment_id = $(this).data("comment-id")
+        const post_id = $(this).data("post-id")
+        e.preventDefault()  //클릭 event 외에 별도의 브라우저 행동을 block (ex: page 이동)
+        e.stopPropagation()  //부모 tag들에 event 전파(bubble up)를 block  
+        $.ajax({
+          type: "DELETE",
+          dataType: "JSON",
+          url: "/posts/" + post_id + '/comments/' + comment_id,
+          data: {},
+          success: function(data) {
+            console.log("success")
+            return
           }
-          $(".comment" + comment_id).remove()
-          return;
-        }
+        })
       })
-    })
     
     $("form").submit(function(event){
       const post_id = $(this).data("post_id")

@@ -36,7 +36,7 @@ class PostsController < ApplicationController
         comment_id = params[:comment_id]
         Comment.destroy(comment_id)
 
-        redirect_to action: 'index'
+        render json: {}
     end
 
     def create_reply

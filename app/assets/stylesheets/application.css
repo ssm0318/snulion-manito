@@ -16,6 +16,9 @@
 
  * { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; }
 
+.name {
+    margin: 0 10px 0 10px;
+}
 a:active {
     background-color: #ff4081;
 }
@@ -91,4 +94,7 @@ textarea {
 }
 .comment-label {
     font-size: 12px;
+}
+.mdl-button--fab.mdl-button--colored {
+    z-index: 10000;
 }
