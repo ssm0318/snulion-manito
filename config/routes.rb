@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   post '/post_commments/:id' => 'posts#create_reply'
 
   # https://github.com/plataformatec/devise
+  # https://github.com/njs03332/snulion6th/blob/master/app/views/feeds/index.html.erb
 end
