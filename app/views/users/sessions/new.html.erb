@@ -1,26 +1,59 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title"><a href='/' style="text-decoration:none; color: white;">Snulion Manito</a></span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <% if user_signed_in? %>
+        <nav class="mdl-navigation">
+          <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+            <a href="/users/edit" style="text-decoration: none; color: white;"><i class="material-icons">account_circle</i></a>
+          </button>
+          <a href="/users/edit" style="margin-left: 10px; text-decoration: none; color: white;"><%= current_user.username %></a>&nbsp;님
+          <a href="users/sign_out" data-method="delete" style="margin-left: 10px; text-decoration: none; color: white;">로그아웃</a>
+        </nav>
+      <% else %>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <a class="mdl-navigation__link" href="/users/sign_in">로그인</a>
+        </nav>
+      <% end %>
     </div>
-  <% end %>
+  </header>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="edit">
+    <h4 style="font-weight: bold;">로그인</h4>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="mdl-textfield mdl-js-textfield">
+        <%= f.label :"이메일" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mdl-textfield__input", id: "sample1" %>
+        <label class="mdl-textfield__label" for="sample1"></label>
+      </div><br>
+
+      <div class="mdl-textfield mdl-js-textfield">
+        <%= f.label :"비밀번호" %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "mdl-textfield__input", id: "sample2" %>
+        <label class="mdl-textfield__label" for="sample2"></label>
+      </div><br>
+
+      <% if devise_mapping.rememberable? %>
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="user_remember_me">
+          <input type="checkbox" id="user_remember_me" class="mdl-checkbox__input" name="user[remember_me]" checked >
+          <span class="mdl-checkbox__label">내 정보 저장하기</span>
+        </label>
+      <% end %><br><br>
+
+      <%= f.submit "로그인", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" %>
+
+    <% end %>
   </div>
-<% end %>
+</div>
 
-<%= render "users/shared/links" %>
+<script>
+  if (window.location.href.indexOf('reload')==-1) {
+      window.location.replace(window.location.href+'?reload');
+  }
+</script>

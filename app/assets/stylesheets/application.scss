@@ -16,6 +16,21 @@
 
  * { font-family: 'Spoqa Han Sans', 'Spoqa Han Sans JP', 'Sans-serif'; }
  
+.error-message {
+    #error_explanation {
+        h2 {
+            display: none;
+        }
+    }
+    ul {
+        font-size: 16px;
+        color: #ff4081;
+    }
+}
+.edit {
+    margin-left: 60px;
+    margin-top: 20px;
+}
 .tabs {
     margin: 25px 0 5px 80px;
     font-size: 16px;
@@ -87,7 +102,8 @@ textarea {
     white-space: pre-line;
 }
 .new-post {
-    margin: 30px;
+    margin-top: 30px;
+    margin-left: 60px;
 }
 .new-title {
     width: 240px;

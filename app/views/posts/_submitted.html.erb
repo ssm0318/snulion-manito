@@ -1,0 +1,53 @@
+
+<% if @submitted_posts.size == 0 %>
+  <%= image_tag 'logo.png', class: "image-center" %>
+<% else %>
+  <% @submitted_posts.each_with_index do |f, i| %>
+    <div class="demo-card-wide mdl-card mdl-shadow--2dp my-card">
+      <div class="mdl-card__supporting-text">
+        <strong><div><%= f.mission %></div></strong>
+        <div><%= f.content %></div>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <ul class="demo-list-three mdl-list no-margin no-padding">
+          <% f.comments.each_with_index do |c, j| %>
+            <li class="mdl-list__item">
+              <span class="mdl-list__item-primary-content">
+                <span class="mdl-list__item-text-body">
+                  <%= j+1%>) <%= c.content %>
+                </span>
+              </span>
+              <% if c.user_id == current_user.id %>
+                <span class="mdl-list__item-secondary-content">
+                    <a data-confirm="진짜 삭제해?!" data-method="DELETE" data-post-id="<%= f.id %>" data-comment-id="<%= c.id %>"class="mdl-list__item-secondary-action ajax-delete" href="/posts/<%= f.id %>/comments/<%= c.id %>"><i class="material-icons">delete</i></a>
+                </span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+        <div class="mdl-grid--no-spacing">
+          <form action='/posts/<%=f.id%>/comments' method='POST'>
+            <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col">
+              <textarea class="mdl-textfield__input comment-section" type="text" id="sample1" name="content" rows="1"></textarea>
+              <label class="mdl-textfield__label comment-label" for="sample1">댓글 작성하기</label>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+              등록
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="mdl-card__menu">
+          <a data-confirm="진짜 삭제해?!" data-method="DELETE" href="/posts/<%= f.id %>" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+            <i class="material-icons">delete</i>
+          </a>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<a href="/posts/new" class="create-post mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+  <i class="material-icons">add</i>
+</a>
+
+<%= render 'posts/js' %>

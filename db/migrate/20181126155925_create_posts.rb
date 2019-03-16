@@ -5,6 +5,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       t.string   :title
       t.text     :content
       t.belongs_to   :user, foreign_key: true
+      t.boolean  :show
 
       t.timestamps
     end

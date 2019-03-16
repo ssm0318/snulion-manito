@@ -1,99 +1,58 @@
-
-<% if @posts.size == 0 %>
-  <%= image_tag 'logo.png', class: "image-center" %>
-<% else %>
-  <div class="tabs"><%= link_to "보냈어요", posts_path %> | <%= link_to "받았어요", new_post_path %></div>
-  <% @posts.each_with_index do |f, i| %>
-    <div class="demo-card-wide mdl-card mdl-shadow--2dp my-card">
-      <div class="mdl-card__supporting-text">
-        <strong><div><%= i+1 %>) <%= f.title %></div></strong>
-        <div><%= f.content %></div>
-      </div>
-      <div class="mdl-card__actions mdl-card--border">
-        <ul class="demo-list-three mdl-list no-margin no-padding">
-          <% f.comments.each_with_index do |c, j| %>
-            <li class="mdl-list__item">
-              <span class="mdl-list__item-primary-content">
-                <span class="mdl-list__item-text-body">
-                  <%= j+1%>) <%= c.content %>
-                </span>
-              </span>
-              <span class="mdl-list__item-secondary-content">
-                <a data-confirm="진짜 삭제해?!" data-method="DELETE" data-post-id="<%= f.id %>" data-comment-id="<%= c.id %>"class="mdl-list__item-secondary-action ajax-delete" href="/posts/<%= f.id %>/comments/<%= c.id %>"><i class="material-icons">delete</i></a>
-              </span>
-            </li>
-          <% end %>
-        </ul>
-        <div class="mdl-grid--no-spacing">
-          <form action='/posts/<%=f.id%>/comments' method='POST'>
-            <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col">
-              <textarea class="mdl-textfield__input comment-section" type="text" id="sample1" name="content" rows="1"></textarea>
-              <label class="mdl-textfield__label comment-label" for="sample1">댓글 작성하기</label>
-            </div>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-              등록
-            </button>
-          </div>
-        </form>
-      </div>
-      <div class="mdl-card__menu">
-          <a data-confirm="진짜 삭제해?!" data-method="DELETE" href="/posts/<%= f.id %>" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-            <i class="material-icons">delete</i>
-          </a>
-      </div>
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title"><a href='/' style="text-decoration:none; color: white;">Snulion Manito</a></span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <% if user_signed_in? %>
+        <nav class="mdl-navigation">
+          <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+            <a href="/users/edit" style="text-decoration: none; color: white;"><i class="material-icons">account_circle</i></a>
+          </button>
+          <a href="/users/edit" style="margin-left: 10px; text-decoration: none; color: white;"><%= current_user.username %></a>&nbsp;님
+          <a href="users/sign_out" data-method="delete" style="margin-left: 10px; text-decoration: none; color: white;">로그아웃</a>
+        </nav>
+      <% else %>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <a class="mdl-navigation__link" href="/users/sign_in">로그인</a>
+        </nav>
+      <% end %>
     </div>
-  <% end %>
-<% end %>
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a href="#scroll-tab-1" class="mdl-layout__tab is-active">받았어요</a>
+      <a href="#scroll-tab-2" class="mdl-layout__tab">보냈어요</a>
+      <a href="#scroll-tab-3" class="mdl-layout__tab">제출했어요</a>
+    </div> 
+  </header>
 
-<a href="/posts/new" class="create-post mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-  <i class="material-icons">add</i>
-</a>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <main class="mdl-layout__content">
+        <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+          <div class="page-content">
+            <%= render 'posts/received' %>
+          </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+          <div class="page-content">
+            <%= render 'posts/sent' %>
+          </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-3">
+          <div class="page-content">
+            <%= render 'posts/submitted' %>
+          </div>
+        </section>
+      </main>
+    </div>
+  </main>
+</div>
 
 <script>
-    var textareas = document.querySelectorAll('textarea');
-
-    for(const textarea of textareas) {
-      textarea.addEventListener('keydown', () => {
-        setTimeout(function(){
-            console.log(textarea.scrollHeight);
-            textarea.style.cssText = 'height:auto; padding:0';
-            textarea.style.cssText = 'height:' + (textarea.scrollHeight) + 'px';
-        },0);
-      });
-    }
-
-    $(document).ready(function(){
-      $(".ajax-delete").on("click", function(e) {
-        const comment_id = $(this).data("comment-id")
-        const post_id = $(this).data("post-id")
-        e.preventDefault()  //클릭 event 외에 별도의 브라우저 행동을 block (ex: page 이동)
-        e.stopPropagation()  //부모 tag들에 event 전파(bubble up)를 block  
-        $.ajax({
-          type: "DELETE",
-          dataType: "JSON",
-          url: "/posts/" + post_id + '/comments/' + comment_id,
-          data: {},
-          success: function(data) {
-            console.log("success")
-            return
-          }
-        })
-      })
-    
-    $("form").submit(function(event){
-      const post_id = $(this).data("post_id")
-      $.ajax({
-        url: "/posts/" + post_id + "/comments",
-        type: "POST",
-        data: {
-          post_id: post_id,
-          content: $(".input"+post_id).val()
-        },
-        dataType: "JSON",
-        success: function(data) {
-          console.log("success")
-          return
-        }
-      })
-    })
+  if (window.location.href.indexOf('reload')==-1) {
+      window.location.replace(window.location.href+'?reload');
+  }
 </script>

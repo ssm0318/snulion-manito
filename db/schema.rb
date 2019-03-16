@@ -10,24 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190315152710) do
+ActiveRecord::Schema.define(version: 20190316025904) do
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
     t.integer "post_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
+    t.string "mission"
     t.string "title"
     t.text "content"
+    t.integer "user_id"
+    t.boolean "show"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo"
-    t.integer "user_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "manito_id", null: false
+    t.integer "manitee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["manitee_id"], name: "index_relationships_on_manitee_id"
+    t.index ["manito_id"], name: "index_relationships_on_manito_id"
   end
 
   create_table "replies", force: :cascade do |t|
@@ -46,7 +59,6 @@ ActiveRecord::Schema.define(version: 20190315152710) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "photo"
     t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
