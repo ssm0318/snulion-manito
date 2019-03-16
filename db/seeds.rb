@@ -39,13 +39,13 @@ User.create(email: "lsm3191@snu.ac.kr", username: "이수민", password: "snulio
 User.create(email: "kleenex0318@gmail.com", username: "김재원", password: "snulion")
 # puts u.errors.full_messages
 
-if Rails.env.development?
-  # Relationship
-  for i in 1..30
-    Relationship.create(manito_id: i, manitee_id: i + 1)
-  end
-  Relationship.create(manito_id: 30, manitee_id: 1)
+# Relationship
+for i in 1..30
+  Relationship.create(manito_id: i, manitee_id: i + 1)
+end
+Relationship.create(manito_id: 30, manitee_id: 1)
 
+if Rails.env.development?
   # Posts
   for i in 0..60
     p = Post.create(user_id: rand(1..30), title: 'hello', content: 'hi')
