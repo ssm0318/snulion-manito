@@ -2,9 +2,13 @@ class PostsController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @received_posts = Post.where(user_id: current_user.manito)
-        @sent_posts = Post.where(user_id: current_user.id, show: true)
+        @received_hints = Post.where(user_id: current_user.manito.id).where("mission like ?", "미션%")
+        @received_missions = Post.where(user_id: current_user.manito.id).where("mission like ?", "힌트%")
+        @sent_hints = Post.where(user_id: current_user.id).where("mission like ?", "미션%")
+        @sent_missions = Post.where(user_id: current_user.id).where("mission like ?", "힌트%")
         @submitted_posts = Post.where(user_id: current_user.id, show: nil)
+        @received_posts = Post.where(user_id: current_user.manito.id)
+        @sent_posts = Post.where(user_id: current_user.id, show: true)
     end
 
     def new
