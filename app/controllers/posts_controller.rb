@@ -50,14 +50,14 @@ class PostsController < ApplicationController
         puts '----------=========================================='
         # p = Post.create(mission: mission, user_id: current_user.id, content: params[:content], show: params[:show], photo: params[:photo])
         @post = Post.new(post_params)
-        if @post.save
+        if @post.save!
             puts '==============================================='
             puts @post.errors.messages
             puts '==============================================='
             @post.mission = mission
             @post.content = params[:content]
             @post.show = params[:show]
-            @post.save
+            @post.save!
             if(!@post.show.nil?)
                 puts '==============================================='
                 puts "here?"
