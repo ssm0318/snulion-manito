@@ -52,8 +52,15 @@ class PostsController < ApplicationController
             if(!@post.show.nil?)
                 NotiMailer.noti_email(@post.user.manitee).deliver_now
             end
+
+            puts '==============================================='
+            puts @post.errors.messages
+            puts '==============================================='
             redirect_to action: 'index'
         else
+            puts '==============================================='
+            puts @post.errors.messages
+            puts '==============================================='
             render :new
         end
     end
