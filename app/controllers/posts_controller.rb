@@ -45,6 +45,9 @@ class PostsController < ApplicationController
         # p = Post.create(mission: mission, user_id: current_user.id, content: params[:content], show: params[:show], photo: params[:photo])
         @post = Post.new(post_params)
         if @post.save
+            puts '==============================================='
+            puts @post.errors.messages
+            puts '==============================================='
             @post.mission = mission
             @post.content = params[:content]
             @post.show = params[:show]
@@ -54,11 +57,7 @@ class PostsController < ApplicationController
                 puts "here?"
                 puts '==============================================='
                 NotiMailer.noti_email(@post.user.manitee).deliver_now
-            end
-
-            puts '==============================================='
-            puts @post.errors.messages
-            puts '==============================================='
+            end            
             redirect_to action: 'index'
         else
             puts '==============================================='
