@@ -16,6 +16,9 @@ class PostsController < ApplicationController
     end
 
     def create
+        puts '===================================================='
+        puts 'came to create'
+        puts '----------=========================================='
         case params[:mission]
         when "hint1"
             mission = "힌트1: 마니띠 첫인상 (손글씨)"
@@ -42,6 +45,9 @@ class PostsController < ApplicationController
         when "mission8"
             mission = "미션8: 칭찬 세 가지가 담긴 손편지"
         end
+        puts '===================================================='
+        puts 'after mission'
+        puts '----------=========================================='
         # p = Post.create(mission: mission, user_id: current_user.id, content: params[:content], show: params[:show], photo: params[:photo])
         @post = Post.new(post_params)
         if @post.save
