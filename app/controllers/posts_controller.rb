@@ -12,6 +12,7 @@ class PostsController < ApplicationController
     end
 
     def new
+        @post = Post.new
     end
 
     def create
@@ -41,9 +42,17 @@ class PostsController < ApplicationController
         when "mission8"
             mission = "미션8: 칭찬 세 가지가 담긴 손편지"
         end
-        p = Post.create(mission: mission, user_id: current_user.id, content: params[:content], show: params[:show], photo: params[:photo])
-
-        redirect_to action: 'index'
+        # p = Post.create(mission: mission, user_id: current_user.id, content: params[:content], show: params[:show], photo: params[:photo])
+        @post = Post.new(post_params)
+        if @post.save
+            @post.mission = mission
+            @post.content = params[:content]
+            @post.show = params[:show]
+            @post.save
+            redirect_to action: 'index'
+        else
+            render :new
+        end
     end
 
     def destroy
@@ -74,4 +83,9 @@ class PostsController < ApplicationController
     def create_reply
         Reply.create(comment_id: params[:id], content: params[:content])
     end
+
+    private
+        def post_params
+            params.require(:post).permit(:id, :user_id, :mission, :content, :show, :photo)
+        end
 end

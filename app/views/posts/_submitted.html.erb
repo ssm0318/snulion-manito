@@ -6,6 +6,7 @@
     <div class="demo-card-wide mdl-card mdl-shadow--2dp my-card">
       <div class="mdl-card__supporting-text">
         <strong><div><%= f.mission %></div></strong>
+        <%= image_tag(f.photo.thumb.url) if f.photo? %>
         <div><%= f.content %></div>
       </div>
       <div class="mdl-card__actions mdl-card--border">

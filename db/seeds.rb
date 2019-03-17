@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(email: "sangw876@naver.com", username: "한상우", password: "snulion")
+User.create(email: "kingzzang5@naver.com", username: "김민기", password: "snulion")
 User.create(email: "hyesoo5115@snu.ac.kr", username: "김혜수", password: "snulion")
 User.create(email: "yesjin_nav@naver.com", username: "김응진", password: "snulion")
 User.create(email: "tyj9327@gmail.com", username: "장태영", password: "snulion")
@@ -16,7 +16,7 @@ User.create(email: "curious.curieyoo@gmail.com", username: "유규리", password
 User.create(email: "bin4021@naver.com", username: "조영빈", password: "snulion")
 User.create(email: "juhee8425@snu.ac.kr", username: "송주희", password: "snulion")
 User.create(email: "gakyunggg297@gmail.com", username: "이가경", password: "snulion")
-User.create(email: "kingzzang5@naver.com", username: "김민기", password: "snulion")
+User.create(email: "sangw876@naver.com", username: "한상우", password: "snulion")
 User.create(email: "njs03332@gmail.com", username: "김유리", password: "snulion")
 User.create(email: "yeeunshin@naver.com", username: "신예은", password: "snulion")
 User.create(email: "kwonij2@snu.ac.kr", username: "권일재", password: "snulion")

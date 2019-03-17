@@ -1,0 +1,70 @@
+
+<%= form_for post do |f| %>
+    <div class="new-post">
+        <h1>새로운 미션 수행</h1>
+        <p>힌트 선택:</p>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+            <input type="radio" id="option-1" class="mdl-radio__button" name="mission" value="hint1" checked>
+            <span class="mdl-radio__label">힌트1: 마니띠 첫인상 (손글씨)</span>
+        </label><br>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+            <input type="radio" id="option-2" class="mdl-radio__button" name="mission" value="hint2">
+            <span class="mdl-radio__label">힌트2: 마니띠 얼굴 그리기</span>
+        </label><br>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+            <input type="radio" id="option-3" class="mdl-radio__button" name="mission" value="hint3">
+            <span class="mdl-radio__label">힌트3: 나에 대한 신박한 사실 한 가지</span>
+        </label><br>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
+            <input type="radio" id="option-4" class="mdl-radio__button" name="mission" value="hint4">
+            <span class="mdl-radio__label">힌트4: 나의 애장품 사진</span>
+        </label><br><br>
+        <p>미션 선택:</p>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-5">
+            <input type="radio" id="option-5" class="mdl-radio__button" name="mission" value="mission1" checked>
+            <span class="mdl-radio__label">미션1: 함께 <코딩> 인증샷</span>
+        </label><br>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-6">
+            <input type="radio" id="option-6" class="mdl-radio__button" name="mission" value="mission2">
+            <span class="mdl-radio__label">미션2: 함께 <식사> 인증샷</span>
+        </label><br>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-7">
+            <input type="radio" id="option-7" class="mdl-radio__button" name="mission" value="mission3">
+            <span class="mdl-radio__label">미션3: 세미나에 지친 마니띠에게 간식과 쪽지를 (2000원 이하)</span>
+        </label><br>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-8">
+            <input type="radio" id="option-8" class="mdl-radio__button" name="mission" value="mission4">
+            <span class="mdl-radio__label">미션4: 주황 or 검정 선물 (3000원 이하)</span>
+        </label><br>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-9">
+            <input type="radio" id="option-9" class="mdl-radio__button" name="mission" value="mission5">
+            <span class="mdl-radio__label">미션5: 하이파이브/악수/새끼손가락 약속/팔씨름</span>
+        </label><br>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-10">
+            <input type="radio" id="option-10" class="mdl-radio__button" name="mission" value="mission6">
+            <span class="mdl-radio__label">미션6: 세상에서 가장 쓸데없는 선물 (5000원 이하)</span>
+        </label><br>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-11">
+            <input type="radio" id="option-11" class="mdl-radio__button" name="mission" value="mission7">
+            <span class="mdl-radio__label">미션7: 마니띠와 짠! (술일 필요는 X)</span>
+        </label><br>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-12">
+            <input type="radio" id="option-12" class="mdl-radio__button" name="mission" value="mission8">
+            <span class="mdl-radio__label">미션8: 칭찬 세 가지가 담긴 손편지</span>
+        </label><br><br>
+        <p>내용*:</p>
+        <div class="mdl-textfield mdl-js-textfield">
+            <textarea class="mdl-textfield__input" type="text" rows= "1" cols="150" id="sample5" required="true" "data-enable-grammarly": "false" name="content" ></textarea>
+            <label class="mdl-textfield__label" for="sample5">메모...</label>
+        </div><br>
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="show">
+            <input type="checkbox" id="show" class="mdl-checkbox__input" name="show" value="true" >
+            <span class="mdl-checkbox__label">마니띠에게 공개하기</span>
+        </label><br><br>
+        <%= f.file_field :photo, accept:'image/*' %>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">제출</button>
+        </form>
+        <br><br><br><br>
+    </div>
+<% end %>

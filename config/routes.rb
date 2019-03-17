@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/' => 'posts#index', as: :posts
   get '/posts/new' => 'posts#new', as: :new_post
-  post '/posts' => 'posts#create'
+  post '/' => 'posts#create', as: :create_post
   delete '/posts/:id' => 'posts#destroy'
   post '/posts/:id/comments' => 'posts#create_comment'
   delete '/posts/:id/comments/:comment_id' => 'posts#destroy_comment'
