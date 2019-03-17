@@ -49,6 +49,9 @@ class PostsController < ApplicationController
             @post.content = params[:content]
             @post.show = params[:show]
             @post.save
+            if(!@post.show.nil?)
+                NotiMailer.noti_email(@post.user.manitee).deliver_now
+            end
             redirect_to action: 'index'
         else
             render :new

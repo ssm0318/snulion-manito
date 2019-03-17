@@ -19,12 +19,12 @@ User.create(email: "gakyunggg297@gmail.com", username: "이가경", password: "s
 User.create(email: "sangw876@naver.com", username: "한상우", password: "snulion")
 User.create(email: "njs03332@gmail.com", username: "김유리", password: "snulion")
 User.create(email: "yeeunshin@naver.com", username: "신예은", password: "snulion")
-User.create(email: "kwonij2@snu.ac.kr", username: "권일재", password: "snulion")
-User.create(email: "rapace0215@gmail.com", username: "김나경", password: "snulion")
 User.create(email: "maeng9584@gmail.com", username: "맹재우", password: "snulion")
-User.create(email: "jenny5546@naver.com", username: "이재은", password: "snulion")
-User.create(email: "cjhanist@gmail.com", username: "한창진", password: "snulion")
+User.create(email: "rapace0215@gmail.com", username: "김나경", password: "snulion")
+User.create(email: "kwonij2@snu.ac.kr", username: "권일재", password: "snulion")
 User.create(email: "wldms5764@gmail.com", username: "송지은", password: "snulion")
+User.create(email: "cjhanist@gmail.com", username: "한창진", password: "snulion")
+User.create(email: "lsm3191@snu.ac.kr", username: "이수민", password: "snulion")
 User.create(email: "gjinsun96@gmail.com", username: "구진선", password: "snulion")
 User.create(email: "gustkd3@gmail.com", username: "한현상", password: "snulion")
 User.create(email: "chaaaamni@gmail.com", username: "임채민", password: "snulion")
@@ -35,8 +35,9 @@ User.create(email: "pdahee329@gmail.com", username: "박다희", password: "snul
 User.create(email: "dwmin95@snu.ac.kr", username: "민대원", password: "snulion")
 User.create(email: "1004_hyunji@naver.com", username: "이현지", password: "snulion")
 User.create(email: "smr603@snu.ac.kr", username: "최연석", password: "snulion")
-User.create(email: "lsm3191@snu.ac.kr", username: "이수민", password: "snulion")
+User.create(email: "jenny5546@naver.com", username: "이재은", password: "snulion")
 User.create(email: "kleenex0318@gmail.com", username: "김재원", password: "snulion")
+User.create(email: "slove0318@snu.ac.kr", username: "재원킴", password: "snulion")
 # puts u.errors.full_messages
 
 # Relationship
@@ -44,6 +45,7 @@ for i in 1..30
   Relationship.create(manito_id: i, manitee_id: i + 1)
 end
 Relationship.create(manito_id: 30, manitee_id: 1)
+Relationship.create(manito_id: 31, manitee_id: 32)
 
 if Rails.env.development?
   # Posts
