@@ -50,6 +50,9 @@ class PostsController < ApplicationController
             @post.show = params[:show]
             @post.save
             if(!@post.show.nil?)
+                puts '==============================================='
+                puts "here?"
+                puts '==============================================='
                 NotiMailer.noti_email(@post.user.manitee).deliver_now
             end
 
