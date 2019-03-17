@@ -45,30 +45,19 @@ class PostsController < ApplicationController
         when "mission8"
             mission = "미션8: 칭찬 세 가지가 담긴 손편지"
         end
-        puts '===================================================='
-        puts 'after mission'
-        puts '----------=========================================='
+
         # p = Post.create(mission: mission, user_id: current_user.id, content: params[:content], show: params[:show], photo: params[:photo])
         @post = Post.new(post_params)
         if @post.save!
-            puts '==============================================='
-            puts @post.errors.messages
-            puts '==============================================='
             @post.mission = mission
             @post.content = params[:content]
             @post.show = params[:show]
             @post.save!
             if(!@post.show.nil?)
-                puts '==============================================='
-                puts "here?"
-                puts '==============================================='
                 NotiMailer.noti_email(@post.user.manitee).deliver_now
             end            
             redirect_to action: 'index'
         else
-            puts '==============================================='
-            puts @post.errors.messages
-            puts '==============================================='
             render :new
         end
     end
@@ -85,17 +74,18 @@ class PostsController < ApplicationController
         content = params[:content]
 
         post = Post.find(post_id)
-        Comment.create(content: content, post_id: post_id)
+        Comment.create(content: content, post_id: post_id, user_id: current_user.id)
 
-        # redirect_to action: 'index'
-        render json: {}
+        redirect_to action: 'index'
+        # render json: {}
     end
 
     def destroy_comment
         comment_id = params[:comment_id]
         Comment.destroy(comment_id)
 
-        render json: {}
+        redirect_to action: 'index'
+        # render json: {}
     end
 
     def create_reply

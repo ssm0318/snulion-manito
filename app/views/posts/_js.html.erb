@@ -11,39 +11,39 @@
     });
   }
 
-  $(document).ready(function(){
-    $(".ajax-delete").on("click", function(e) {
-      const comment_id = $(this).data("comment-id")
-      const post_id = $(this).data("post-id")
-      e.preventDefault()  //클릭 event 외에 별도의 브라우저 행동을 block (ex: page 이동)
-      e.stopPropagation()  //부모 tag들에 event 전파(bubble up)를 block  
-      $.ajax({
-        type: "DELETE",
-        dataType: "JSON",
-        url: "/posts/" + post_id + '/comments/' + comment_id,
-        data: {},
-        success: function(data) {
-          console.log("success")
-          return
-        }
-      })
-    })
-  });
+  // $(document).ready(function(){
+  //   $(".ajax-delete").on("click", function(e) {
+  //     const comment_id = $(this).data("comment-id")
+  //     const post_id = $(this).data("post-id")
+  //     e.preventDefault()  //클릭 event 외에 별도의 브라우저 행동을 block (ex: page 이동)
+  //     e.stopPropagation()  //부모 tag들에 event 전파(bubble up)를 block  
+  //     $.ajax({
+  //       type: "DELETE",
+  //       dataType: "JSON",
+  //       url: "/posts/" + post_id + '/comments/' + comment_id,
+  //       data: {},
+  //       success: function(data) {
+  //         console.log("success")
+  //         return
+  //       }
+  //     })
+  //   })
+  // });
   
-  $("form").submit(function(event){
-    const post_id = $(this).data("post_id")
-    $.ajax({
-      url: "/posts/" + post_id + "/comments",
-      type: "POST",
-      data: {
-        post_id: post_id,
-        content: $(".input"+post_id).val()
-      },
-      dataType: "JSON",
-      success: function(data) {
-        console.log("success")
-        return
-      }
-    })
-  });
+  // $("form").submit(function(event){
+  //   const post_id = $(this).data("post_id")
+  //   $.ajax({
+  //     url: "/posts/" + post_id + "/comments",
+  //     type: "POST",
+  //     data: {
+  //       post_id: post_id,
+  //       content: $(".input"+post_id).val()
+  //     },
+  //     dataType: "JSON",
+  //     success: function(data) {
+  //       console.log("success")
+  //       return
+  //     }
+  //   })
+  // });
 </script>
