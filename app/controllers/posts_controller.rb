@@ -4,7 +4,7 @@ class PostsController < ApplicationController
     def index
         @received_hints = Post.where(user_id: current_user.manito).where("mission like ?", "힌트%")
         @received_missions = Post.where(user_id: current_user.manito).where("mission like ?", "미션%")
-        @sent_hints = Post.where(user_id: current_user.id, show: true).where("mission like ?", "힌트미션%")
+        @sent_hints = Post.where(user_id: current_user.id, show: true).where("mission like ?", "힌트%")
         @sent_missions = Post.where(user_id: current_user.id, show: true).where("mission like ?", "미션%")
         @submitted_posts = Post.where(user_id: current_user.id, show: nil)
         @received_posts = Post.where(user_id: current_user.manito)
