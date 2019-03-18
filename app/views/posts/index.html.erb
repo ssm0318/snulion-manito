@@ -25,6 +25,7 @@
       <a href="#scroll-tab-1" class="mdl-layout__tab is-active">받았어요</a>
       <a href="#scroll-tab-2" class="mdl-layout__tab">보냈어요</a>
       <a href="#scroll-tab-3" class="mdl-layout__tab">제출했어요</a>
+      <a href="#scroll-tab-4" class="mdl-layout__tab">질문 모음</a>
     </div> 
   </header>
 
@@ -46,9 +47,18 @@
             <%= render 'posts/submitted' %>
           </div>
         </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-4">
+          <div class="page-content">
+            <%= render 'posts/faq' %>
+          </div>
+        </section>
       </main>
     </div>
   </main>
+
+  <a href="/posts/new" class="create-post mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    <i class="material-icons">add</i>
+  </a>
 </div>
 
 <script>
