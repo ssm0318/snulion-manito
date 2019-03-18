@@ -16,18 +16,15 @@ class PostsController < ApplicationController
     end
 
     def create
-        puts '===================================================='
-        puts 'came to create'
-        puts '----------=========================================='
         case params[:mission]
         when "hint1"
             mission = "힌트1: 마니띠 첫인상 (손글씨)"
         when "hint2"
-            mission = "힌트1: 마니띠 첫인상 (손글씨)"
+            mission = "힌트2: 마니띠 첫인상 (손글씨)"
         when "hint3"
-            mission = "힌트1: 마니띠 첫인상 (손글씨)"
+            mission = "힌트3: 마니띠 첫인상 (손글씨)"
         when "hint4"
-            mission = "힌트1: 마니띠 첫인상 (손글씨)"
+            mission = "힌트4: 마니띠 첫인상 (손글씨)"
         when "mission1"
             mission = "미션1: 함께 <코딩> 인증샷"
         when "mission2"
