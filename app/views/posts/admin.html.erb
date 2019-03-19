@@ -2,7 +2,7 @@
 
 <div class="edit">
     <% (1..30).each do |i| %>
-        <%= User.find(i).username %>님이 제출한 게시물<br>
+        <%= User.find(i).username %>님 (마니띠: <%= User.find(i).manitee.username %>)이 제출한 게시물<br>
             <% Post.where(user_id: User.find(i)).each do |f| %>
                 <div class="demo-card-wide mdl-card mdl-shadow--2dp my-card">
                 <div class="mdl-card__supporting-text">
