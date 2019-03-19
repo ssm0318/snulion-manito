@@ -89,6 +89,9 @@ class PostsController < ApplicationController
         Reply.create(comment_id: params[:id], content: params[:content])
     end
 
+    def admin
+    end
+
     private
         def post_params
             params.require(:post).permit(:id, :user_id, :mission, :content, :show, :photo)

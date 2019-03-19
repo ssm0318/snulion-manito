@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/posts/:id/comments' => 'posts#create_comment'
   delete '/posts/:id/comments/:comment_id' => 'posts#destroy_comment'
   post '/post_commments/:id' => 'posts#create_reply'
+  get '/posts/admin' => 'posts#admin'
 
   # https://github.com/plataformatec/devise
   # https://github.com/njs03332/snulion6th/blob/master/app/views/feeds/index.html.erb
