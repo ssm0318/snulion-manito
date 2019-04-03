@@ -13,4 +13,6 @@ class User < ApplicationRecord
 
   has_one :manito_relationship, :class_name => 'Relationship', :foreign_key => "manitee_id", dependent: :destroy
   has_one :manito, :through => :manito_relationship, dependent: :destroy
+
+  has_many :guesses, dependent: :destroy
 end

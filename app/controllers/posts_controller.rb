@@ -100,6 +100,9 @@ class PostsController < ApplicationController
         u.try = u.try - 1
         u.save
 
+        g = Guess.create(user_id: current_user.id, content: params[:content])
+        NotiMailer.guess_email(current_user.manito, g).deliver_now
+
         if params[:content] == current_user.manito.username
             @message = "맞았습니다!!! 훌륭해요!!"
             u.guessed = true
