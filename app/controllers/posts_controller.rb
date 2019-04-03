@@ -92,6 +92,26 @@ class PostsController < ApplicationController
     def admin
     end
 
+    def guess
+    end
+
+    def match
+        u = current_user
+        u.try = u.try - 1
+        u.save
+
+        if params[:content] == current_user.manito.username
+            @message = "맞았습니다!!! 훌륭해요!!"
+            u.guessed = true
+            u.save
+        else
+            if u.try > 0
+                @message = "틀렸습니다!! 다시 도전해보세요~"
+            end
+        end
+        render 'guess'
+    end
+
     private
         def post_params
             params.require(:post).permit(:id, :user_id, :mission, :content, :show, :photo)

@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   delete '/posts/:id/comments/:comment_id' => 'posts#destroy_comment'
   post '/post_commments/:id' => 'posts#create_reply'
   get '/posts/admin' => 'posts#admin'
+  get '/posts/guess' => 'posts#guess'
+  post '/posts/guess' => 'posts#match'
 
   # https://github.com/plataformatec/devise
   # https://github.com/njs03332/snulion6th/blob/master/app/views/feeds/index.html.erb

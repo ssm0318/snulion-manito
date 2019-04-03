@@ -1,0 +1,53 @@
+
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title"><a href='/' style="text-decoration:none; color: white;">Snulion Manito</a></span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <% if user_signed_in? %>
+        <nav class="mdl-navigation">
+          <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+            <a href="/users/edit" style="text-decoration: none; color: white;"><i class="material-icons">account_circle</i></a>
+          </button>
+          <a href="/users/edit" style="margin-left: 10px; text-decoration: none; color: white;"><%= current_user.username %></a>&nbsp;님
+          <a href="/users/sign_out" data-method="delete" style="margin-left: 10px; text-decoration: none; color: white;">로그아웃</a>
+        </nav>
+      <% else %>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <a class="mdl-navigation__link" href="/users/sign_in">로그인</a>
+        </nav>
+      <% end %>
+    </div>
+  </header>
+
+
+    <div class="new-post">
+        <h1>마니또 맞히기</h1>
+        <p style="color: red;"><%= @message %></p>
+        <% if !current_user.guessed && (current_user.try > 0) %>
+            <p>도전 가능 횟수: <%= current_user.try %>회</p><br><br>
+            <%= form_tag("/posts/guess", method: "post") do %>
+                <%= hidden_field_tag :user_id, :value => current_user.id %>
+                <p>마니또 이름 입력 (정확히 입력해주세요)*:</p>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <textarea class="mdl-textfield__input" type="text" rows= "1" cols="150" id="sample5" required="true" "data-enable-grammarly": "false" name="content" ></textarea>
+                    <label class="mdl-textfield__label" for="sample5">메모...</label>
+                </div><br>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">제출</button><br><br><br><br>
+            <% end %>
+        <% elsif current_user.guessed %>
+            <%= image_tag "tease.jpg" %><br><br>
+            <p>맞혔다네 맞혔다네 나는 맞혔다네~</p>
+            <p><%= current_user.manito.username %> 마니또!! 자네는 나의 손바닥 안이야~~</p>
+        <% else %>
+            <p>두 번의 기회를 모두 사용해 더 이상 도전할 수 없습니다ㅠㅠ</p>
+        <% end %>
+    </div>
+</div>
+
+<%= render 'posts/js' %>
+
