@@ -27,7 +27,7 @@
 
     (가나다순)<br>
     <% (1..30).each do |i| %>
-        <a href="#openDiv<%=@alphabetic[i]%>" class="scrollLink"><%= User.find(@alphabetic[i]).username %></a>
+        <a href="#openDiv<%=@alphabetic[i]%>" class="scrollLink"><%= User.find(@alphabetic[i]).username %></a>&nbsp;
         <% if i % 5 == 0 %><br><% end %>
     <% end %>
 

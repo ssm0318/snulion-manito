@@ -158,3 +158,22 @@ textarea {
 .scrollLink {
     line-height: 2;
 }
+
+@media only screen and (max-device-width: 500px) {
+    .scrollLink {
+        font-size: 30px;
+    }
+
+    #top-btn {
+        font-size: 50px;
+        padding: 8px 25px;
+    }
+
+    .showSingle {
+        font-size: 23px;
+    }
+
+    .edit {
+        font-size: 23px;
+    }
+}
