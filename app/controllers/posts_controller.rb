@@ -115,6 +115,83 @@ class PostsController < ApplicationController
         render 'guess'
     end
 
+    def results
+        @alphabetic = [nil, 20, 16, 25, 15, 1, 12, 3, 2, 14, 27, 26, 23, 9, 17, 13, 5, 7, 10, 6, 19, 30, 28, 22, 4, 24, 8, 29, 11, 18, 21]
+
+        @coffee = Array.new(31, 0)
+        @bap = Array.new(31, 0)
+
+        @balgak = [nil]
+        (1..30).each do |i|
+            if User.find(i).manitee.guessed
+                @balgak.push(true)
+                @bap[i] = @bap[i] + 1
+            end
+        end
+
+        @hint = [nil]
+        (1..30).each do |i|
+            u = User.find(i)
+            if ((u.posts.exists?(['mission LIKE ?', "힌트1%"])) && (u.posts.exists?(['mission LIKE ?', "힌트2%"])) &&
+                (u.posts.exists?(['mission LIKE ?', "힌트3%"])) && (u.posts.exists?(['mission LIKE ?', "힌트4%"])))
+                @hint.push(true)
+            else
+                @hint.push(false)
+                @coffee[i] = @coffee[i] + 1
+            end
+        end
+
+        @first_mission = [nil]
+        (1..30).each do |i|
+            u = User.find(i)
+            count = 0
+            if (u.posts.exists?(['mission LIKE ?', "미션1%"])) 
+                count += 1  
+            end
+            if (u.posts.exists?(['mission LIKE ?', "미션2%"])) 
+                count += 1 
+            end
+            if (u.posts.exists?(['mission LIKE ?', "미션3%"])) 
+                count += 1 
+            end
+            if (u.posts.exists?(['mission LIKE ?', "미션4%"])) 
+                count += 1 
+            end
+            if count >= 2
+                @first_mission.push(true)
+            else
+                @first_mission.push(false)
+                @coffee[i] = @coffee[i] + 1
+            end
+        end
+
+        @second_mission = [nil]
+        (1..30).each do |i|
+            u = User.find(i)
+            count = 0
+            if (u.posts.exists?(['mission LIKE ?', "미션5%"])) 
+                count += 1 
+            end
+            if (u.posts.exists?(['mission LIKE ?', "미션6%"])) 
+                count += 1 
+            end
+            if (u.posts.exists?(['mission LIKE ?', "미션7%"])) 
+                count += 1 
+            end
+            if (u.posts.exists?(['mission LIKE ?', "미션8%"])) 
+                count += 1 
+            end
+            if count >= 2
+                @second_mission.push(true)
+            else
+                @second_mission.push(false)
+                if @first_mission[i] && !@second_mission[i]
+                    @coffee[i] = @coffee[i] + 1
+                end
+            end
+        end
+    end
+
     private
         def post_params
             params.require(:post).permit(:id, :user_id, :mission, :content, :show, :photo)

@@ -1,0 +1,156 @@
+<% if current_user.username == "김재원" %>
+<header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+    <!-- Title -->
+    <span class="mdl-layout-title"><a href='/' style="text-decoration:none; color: white;">Snulion Manito</a></span>
+    <!-- Add spacer, to align navigation to the right -->
+    <div class="mdl-layout-spacer"></div>
+    <!-- Navigation. We hide it in small screens. -->
+    <% if user_signed_in? %>
+        <nav class="mdl-navigation">
+        <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+            <a href="/users/edit" style="text-decoration: none; color: white;"><i class="material-icons">account_circle</i></a>
+        </button>
+        <a href="/users/edit" style="margin-left: 10px; text-decoration: none; color: white;"><%= current_user.username %></a>&nbsp;님
+        <a href="/users/sign_out" data-method="delete" style="margin-left: 10px; text-decoration: none; color: white;">로그아웃</a>
+        </nav>
+    <% else %>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <a class="mdl-navigation__link" href="/users/sign_in">로그인</a>
+        </nav>
+    <% end %>
+    </div>
+</header>
+
+<div class="edit"><br>
+    <!--<%= link_to "메인 페이지로", posts_path, class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %><br><br>-->
+
+    (가나다순)<br>
+    <% (1..30).each do |i| %>
+        <a href="#openDiv<%=@alphabetic[i]%>" class="scrollLink"><%= User.find(@alphabetic[i]).username %></a>
+        <% if i % 5 == 0 %><br><% end %>
+    <% end %>
+
+    <br>
+    <a class="showAll mdl-button mdl-js-button mdl-button--raised mdl-button--colored">모두 펼쳐보기</a><br>
+    <% (1..30).each do |i| %>
+        <div id="openDiv<%=i%>">
+            <br>
+            <% u = User.find(i) %>
+            <strong><%= u.username %></strong>님 (마니띠: <%= u.manitee.username %>님)<br>
+            <ul>
+                <li><strong>발각?</strong> <%= @balgak[i] == true ? "ㅇㅇ" : "ㄴㄴ" %><br></li>
+                <li><strong>힌트 모두 제공 완료?</strong> <%= @hint[i] == true ? "ㅇㅇ" : "ㄴㄴ" %><br></li>
+                <li><strong>1-2주차 미션 완료?</strong> <%= @first_mission[i] == true ? "ㅇㅇ" : "ㄴㄴ" %><br></li>
+                <li><strong>3-4주차 미션 완료?</strong> <%= @second_mission[i] == true ? "ㅇㅇ" : "ㄴㄴ" %><br></li>
+                <li><%= User.find(i).username %> 마니또님은 <%= User.find(i).manitee.username %> 마니띠님에게
+                    <strong>커피 <%= @coffee[i] %>잔</strong>과 <strong>밥 <%= @bap[i]%>끼</strong>를 사주시면 됩니다 ^_^</li>
+                <li>고마운 마니또 <strong><%= u.manito.username %></strong>님에게도 말을 건네보고 소소한 보답을 해주면 더더욱 좋겠죠? ~.~</li>
+            </ul>
+            
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="showSingle" target="<%=i%>">상세보기</a>
+            <div id="div<%=i%>" class="targetDiv">
+                <% Post.where(user_id: User.find(i)).each do |f| %>
+                    <div class="demo-card-wide mdl-card mdl-shadow--2dp my-card">
+                    <div class="mdl-card__supporting-text">
+                        <strong><div><%= f.mission %></div></strong>
+                        <%= image_tag(f.photo.thumb.url) if f.photo? %>
+                        <div><%= f.content %></div>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <ul class="demo-list-three mdl-list no-margin no-padding">
+                        <% f.comments.each_with_index do |c, j| %>
+                            <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <span class="mdl-list__item-text-body">
+                                <%= j+1%>) <%= c.content %>
+                                </span>
+                            </span>
+                            <% if c.user_id == current_user.id %>
+                                <span class="mdl-list__item-secondary-content">
+                                <a data-confirm="진짜 삭제해?!" data-method="DELETE" data-post-id="<%= f.id %>" data-comment-id="<%= c.id %>"class="mdl-list__item-secondary-action ajax-delete" href="/posts/<%= f.id %>/comments/<%= c.id %>"><i class="material-icons">delete</i></a>
+                                </span>
+                            <% end %>
+                            </li>
+                        <% end %>
+                        </ul>
+                        <div class="mdl-grid--no-spacing">
+                        <form action='/posts/<%=f.id%>/comments' method='POST'>
+                            <div class="mdl-textfield mdl-js-textfield mdl-cell--9-col">
+                            <textarea class="mdl-textfield__input comment-section" type="text" id="sample1" name="content" rows="1"></textarea>
+                            <label class="mdl-textfield__label comment-label" for="sample1">댓글 작성하기</label>
+                            </div>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                            등록
+                            </button>
+                        </div>
+                        </form>
+                    </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <br>
+    <% end %>
+</div>
+<br><br>
+
+<button id="top-btn"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+
+<script>
+    $(document).ready(function() {
+        $("#top-btn").click(function () {
+            $('body, html').animate({scrollTop: 0}, 500);
+            console.log($(this).scrollTop());
+        });
+
+        $(window).scroll(function() {
+            console.log($(this).scrollTop());
+            console.log("hello");
+            if ($(this).scrollTop() > 20) {
+                console.log("hello");
+                $('#top-btn').fadeIn();
+            } else {
+                console.log("bye");
+                $('#top-btn').fadeOut();
+            }
+        });
+
+        $('.showAll').click(function() {
+            // $('.targetDiv').toggle();
+            if($(this).text() == '모두 펼쳐보기') {
+                $('.targetDiv').show();
+                $('.showSingle').text("상세보기 접기");
+            } else {
+                $('.targetDiv').hide();
+                $('.showSingle').text("상세보기");
+            }
+            $(this).text($(this).text() == '모두 펼쳐보기' ? '모두 접기' : '모두 펼쳐보기');
+        });
+
+        $('.showSingle').click(function() {
+            // $('#div' + $(this).attr('target')).toggle();
+            if($('#div' + $(this).attr('target')).is(":visible")) {
+                $('#div' + $(this).attr('target')).hide();
+                $(this).text("상세보기");
+            } else {
+                $('#div' + $(this).attr('target')).show();
+                $(this).text("상세보기 접기");
+            }
+            // $(this).text($(this).text() == '미션 수행 상세보기' ? '상세보기 접기' : '미션 수행 상세보기');
+        });
+    });
+
+    $(document).ready(function(){
+        $( "a.scrollLink" ).click(function( event ) {
+            event.preventDefault();
+            $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top }, 500);
+        });
+    });
+</script>
+
+<% else %>
+<h1> &nbsp;&nbsp;&nbsp;킼키킼ㅋ 아직 못 봐요~ 미션 열심히 하세요!!!!!!! :D</h1>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to "메인 페이지로", posts_path, class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %>
+<% end %>

@@ -129,3 +129,32 @@ textarea {
 .mdl-button--fab.mdl-button--colored {
     z-index: 10000;
 }
+.targetDiv {
+    display: none;
+}
+
+#top-btn {
+    display: none;
+    // display: block;
+    position: fixed;
+    bottom: 25px;
+    right: 35px;
+    z-index: 99;
+    font-size: 23px;
+    border: none;
+    outline: none;
+    background-color: #a3a19f;
+    opacity: 0.8;
+    color: white;
+    padding: 5px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#top-btn:hover {
+    background-color: #ff3f81;
+}
+
+.scrollLink {
+    line-height: 2;
+}
