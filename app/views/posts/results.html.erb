@@ -27,25 +27,26 @@
         <%= link_to "메인 페이지로", posts_path, class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %><br><br>
     </div>
 
-    <커피/밥 규칙><br>
-    <ul>
-        <li>힌트 제공 완료 X: <strong>1 커피</strong></li>
-        <li>미션 수행 개수 4~8개: <strong>0 커피</strong></li>
-        <li>미션 수행 개수 2~3개: <strong>1 커피</strong></li>
-        <li>미션 수행 개수 0~1개: <strong>1 밥</strong></li>
-        <li>발각: <strong>1 밥</strong></li>
-    </ul><br>
+    <div class="plain-text">
+        <커피/밥 규칙><br>
+        <ul>
+            <li>힌트 제공 완료 X: <strong>1 커피</strong></li>
+            <li>미션 수행 개수 4~8개: <strong>0 커피</strong></li>
+            <li>미션 수행 개수 2~3개: <strong>1 커피</strong></li>
+            <li>미션 수행 개수 0~1개: <strong>1 밥</strong></li>
+            <li>발각: <strong>1 밥</strong></li>
+        </ul><br>
 
-    (가나다순)<br>
+    (가나다순)<br></div>
     <% (1..30).each do |i| %>
-        <a href="#openDiv<%=@alphabetic[i]%>" class="scrollLink"><%= User.find(@alphabetic[i]).username %></a>&nbsp;
+        <a href="#openDiv<%=@alphabetic[i]%>" class="scrollLink"><%= User.find(@alphabetic[i]).username %></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <% if i % 5 == 0 %><br><% end %>
     <% end %>
 
     <br>
     <a class="showAll mdl-button mdl-js-button mdl-button--raised mdl-button--colored">모두 펼쳐보기</a><br>
     <% (1..30).each do |i| %>
-        <div id="openDiv<%=i%>">
+        <div id="openDiv<%=i%>" class="plain-text">
             <br>
             <% u = User.find(i) %>
             <strong><%= u.username %></strong>님 (마니띠: <%= u.manitee.username %>님)<br>
