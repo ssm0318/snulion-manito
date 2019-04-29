@@ -185,9 +185,7 @@ class PostsController < ApplicationController
                 @second_mission.push(true)
             else
                 @second_mission.push(false)
-                if @first_mission[i] && !@second_mission[i]
-                    @coffee[i] = @coffee[i] + 1
-                end
+                @coffee[i] = @coffee[i] + 1
             end
         end
     end
