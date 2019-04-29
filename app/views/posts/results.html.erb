@@ -112,17 +112,12 @@
     $(document).ready(function() {
         $("#top-btn").click(function () {
             $('body, html').animate({scrollTop: 0}, 500);
-            console.log($(this).scrollTop());
         });
 
         $(window).scroll(function() {
-            console.log($(this).scrollTop());
-            console.log("hello");
             if ($(this).scrollTop() > 20) {
-                console.log("hello");
                 $('#top-btn').fadeIn();
             } else {
-                console.log("bye");
                 $('#top-btn').fadeOut();
             }
         });
@@ -155,7 +150,7 @@
     $(document).ready(function(){
         $( "a.scrollLink" ).click(function( event ) {
             event.preventDefault();
-            $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top - 130 }, 500);
+            $("html, body").animate({ scrollTop: $($(this).attr("href")).offset().top - 110 }, 750);
         });
     });
 </script>
