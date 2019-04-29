@@ -159,6 +159,20 @@ textarea {
     line-height: 2;
 }
 
+// .mobile-only {
+//     display: none;
+// }
+
+.mdl-layout__tab-bar {
+    width: 90%;
+    padding: 0;
+    margin: auto;
+}
+
+.mdl-layout__header-row {
+    padding: 0 3.5% 0 4.5%;
+}
+
 @media only screen and (max-device-width: 500px) {
     .scrollLink {
         font-size: 30px;
