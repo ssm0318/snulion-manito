@@ -73,16 +73,18 @@ class PostsController < ApplicationController
         post = Post.find(post_id)
         Comment.create(content: content, post_id: post_id, user_id: current_user.id)
 
-        redirect_to action: 'index'
+        # redirect_to action: 'index'
         # render json: {}
+        redirect_to request.referrer
     end
 
     def destroy_comment
         comment_id = params[:comment_id]
         Comment.destroy(comment_id)
 
-        redirect_to action: 'index'
+        # redirect_to action: 'index'
         # render json: {}
+        redirect_to request.referrer
     end
 
     def create_reply

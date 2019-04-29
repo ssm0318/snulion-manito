@@ -75,7 +75,7 @@
                             <li class="mdl-list__item">
                             <span class="mdl-list__item-primary-content">
                                 <span class="mdl-list__item-text-body">
-                                <%= j+1%>) <%= c.content %>
+                                <%= c.user.username %>) <%= c.content %>
                                 </span>
                             </span>
                             <% if c.user_id == current_user.id %>
@@ -115,7 +115,13 @@
 
 <button id="top-btn"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
 
+<%= render 'posts/js' %>
+
 <script>
+    if (window.location.href.indexOf('reload')==-1) {
+        window.location.replace(window.location.href+'?reload');
+    }
+    
     $(document).ready(function() {
         $("#top-btn").click(function () {
             $('body, html').animate({scrollTop: 0}, 500);
