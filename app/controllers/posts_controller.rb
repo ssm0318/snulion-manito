@@ -143,7 +143,8 @@ class PostsController < ApplicationController
             end
         end
 
-        @first_mission = [nil]
+        @mission_boolean = [nil]
+        @mission_number = [nil]
         (1..30).each do |i|
             u = User.find(i)
             count = 0
@@ -159,18 +160,6 @@ class PostsController < ApplicationController
             if (u.posts.exists?(['mission LIKE ?', "미션4%"])) 
                 count += 1 
             end
-            if count >= 2
-                @first_mission.push(true)
-            else
-                @first_mission.push(false)
-                @coffee[i] = @coffee[i] + 1
-            end
-        end
-
-        @second_mission = [nil]
-        (1..30).each do |i|
-            u = User.find(i)
-            count = 0
             if (u.posts.exists?(['mission LIKE ?', "미션5%"])) 
                 count += 1 
             end
@@ -183,11 +172,16 @@ class PostsController < ApplicationController
             if (u.posts.exists?(['mission LIKE ?', "미션8%"])) 
                 count += 1 
             end
-            if count >= 2
-                @second_mission.push(true)
-            else
-                @second_mission.push(false)
+
+            @mission_number.push(count)
+            if count >= 4
+                @mission_boolean.push(true)
+            elsif count > 1
+                @mission_boolean.push(false)
                 @coffee[i] = @coffee[i] + 1
+            else
+                @mission_boolean.push(false)
+                @bap[i] = @bap[i] + 1
             end
         end
     end

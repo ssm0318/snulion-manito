@@ -24,6 +24,14 @@
 
 <div class="edit"><br>
     <!--<%= link_to "메인 페이지로", posts_path, class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %><br><br>-->
+    <커피/밥 규칙><br>
+    <ul>
+        <li>힌트 제공 완료 X: <strong>1 커피</strong></li>
+        <li>미션 수행 개수 4~8개: <strong>0 커피</strong></li>
+        <li>미션 수행 개수 2~3개: <strong>1 커피</strong></li>
+        <li>미션 수행 개수 0~1개: <strong>1 밥</strong></li>
+        <li>발각: <strong>1 밥</strong></li>
+    </ul><br>
 
     (가나다순)<br>
     <% (1..30).each do |i| %>
@@ -41,8 +49,8 @@
             <ul>
                 <li><strong>발각?</strong> <%= @balgak[i] == true ? "ㅇㅇ" : "ㄴㄴ" %><br></li>
                 <li><strong>힌트 모두 제공 완료?</strong> <%= @hint[i] == true ? "ㅇㅇ" : "ㄴㄴ" %><br></li>
-                <li><strong>1-2주차 미션 완료?</strong> <%= @first_mission[i] == true ? "ㅇㅇ" : "ㄴㄴ" %><br></li>
-                <li><strong>3-4주차 미션 완료?</strong> <%= @second_mission[i] == true ? "ㅇㅇ" : "ㄴㄴ" %><br></li>
+                <li><strong>미션 완료?</strong> <%= @mission_boolean[i] == true ? "ㅇㅇ" : "ㄴㄴ" %><br></li>
+                <li><strong>미션 완료 개수?</strong> <%= @mission_number[i] %>개<br></li>
                 <li><%= User.find(i).username %> 마니또님은 <%= User.find(i).manitee.username %> 마니띠님에게
                     <strong>커피 <%= @coffee[i] %>잔</strong>과 <strong>밥 <%= @bap[i]%>끼</strong>를 사주시면 됩니다 ^_^</li>
                 <li>고마운 마니또 <strong><%= u.manito.username %></strong>님에게도 말을 건네보고 소소한 보답을 해주면 더더욱 좋겠죠? ~.~</li>
