@@ -33,8 +33,7 @@ h3 {
     }
 }
 .edit {
-    margin-left: 60px;
-    margin-top: 20px;
+    margin: 20px 60px 20px 60px;
 }
 .tabs {
     margin: 25px 0 5px 80px;
@@ -159,9 +158,9 @@ textarea {
     line-height: 2;
 }
 
-// .mobile-only {
-//     display: none;
-// }
+.mobile-only {
+    display: none;
+}
 
 .mdl-layout__tab-bar {
     width: 90%;
@@ -189,5 +188,9 @@ textarea {
 
     .edit {
         font-size: 23px;
+    }
+
+    .mobile-only {
+        display: block;
     }
 }
