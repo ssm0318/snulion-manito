@@ -126,6 +126,8 @@ class PostsController < ApplicationController
             if User.find(i).manitee.guessed
                 @balgak.push(true)
                 @bap[i] = @bap[i] + 1
+            else
+                @balgak.push(false)
             end
         end
 
