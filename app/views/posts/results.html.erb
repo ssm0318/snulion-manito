@@ -44,7 +44,7 @@
     <% end %>
 
     <br>
-    <a class="showAll mdl-button mdl-js-button mdl-button--raised mdl-button--colored">모두 펼쳐보기</a><br>
+    <a class="showAll mdl-button mdl-js-button mdl-button--raised mdl-button--colored">모두 접기</a><br>
     <% (1..30).each do |i| %>
         <div id="openDiv<%=i%>" class="plain-text">
             <br>
@@ -60,7 +60,7 @@
                 <li>고마운 마니또 <strong><%= u.manito.username %></strong>님에게도 말을 건네보고 소소한 보답을 해주면 더더욱 좋겠죠? ~.~</li>
             </ul>
             
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="showSingle" target="<%=i%>">상세보기</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="showSingle" target="<%=i%>">상세보기 접기</a>
             <div id="div<%=i%>" class="targetDiv">
                 <% Post.where(user_id: User.find(i)).each do |f| %>
                     <div class="demo-card-wide mdl-card mdl-shadow--2dp my-card">
